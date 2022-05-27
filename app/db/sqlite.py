@@ -2,9 +2,11 @@ import sqlite3
 from app.db import SQL_DIR, CACHE_DIR
 
 DB_INIT_SCRIPT = 'init_hw.sql'
+DB_FILE_NAME = 'hw_storage.sqlite3'
+
 
 class SQLite:
-    def __init__(self, file=f'{CACHE_DIR}/db.sqlite3'):
+    def __init__(self, file=f'{CACHE_DIR}/{DB_FILE_NAME}'):
         self.file = file
 
     def __enter__(self):
@@ -21,6 +23,3 @@ def initialize_hw_database():
     with SQLite() as cur:
         with open(f'{SQL_DIR}/{DB_INIT_SCRIPT}') as sql:
             cur.executescript(sql.read())
-
-        for row in cur.execute('select * from purchases'):
-            print(row)

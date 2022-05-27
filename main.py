@@ -1,3 +1,6 @@
-from app.db.sqlite import SQLite, initialize_hw_database
+from app.db.postgres import Postgres
 
-initialize_hw_database()
+
+with Postgres() as cur:
+    cur.execute('select version()')
+    print(cur.fetchone())
