@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from app.db import SQL_DIR, CACHE_DIR
 
@@ -20,6 +21,7 @@ class SQLite:
 
 
 def init_hw_sqlite_db():
+    os.remove(f'{CACHE_DIR}/{DB_FILE_NAME}')
     with SQLite() as cur:
         with open(f'{SQL_DIR}/{DB_INIT_SCRIPT}') as sql:
             cur.executescript(sql.read())
