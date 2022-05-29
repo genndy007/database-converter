@@ -7,3 +7,9 @@ POSTGRES_CONNECTION_DATA = dict(
     password='postgres',
     port='5432',
 )
+
+MYSQL_CONNECTION_DATA = dict(
+    host='localhost',
+    user='mysqluser',
+    password='mysqlpassword',
+)
