@@ -1,7 +1,7 @@
 import sqlite3
 from app.db import SQL_DIR, CACHE_DIR
 
-DB_INIT_SCRIPT = 'init_hw.sql'
+DB_INIT_SCRIPT = 'init_hw_lite.sql'
 DB_FILE_NAME = 'hw_storage.sqlite3'
 
 
@@ -19,7 +19,7 @@ class SQLite:
         self.conn.close()
 
 
-def initialize_hw_database():
+def init_hw_sqlite_db():
     with SQLite() as cur:
         with open(f'{SQL_DIR}/{DB_INIT_SCRIPT}') as sql:
             cur.executescript(sql.read())
