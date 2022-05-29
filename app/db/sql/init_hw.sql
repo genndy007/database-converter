@@ -1,3 +1,4 @@
+-- sqlite 3
 PRAGMA foreign_keys = ON;
 
 drop table if exists customers;
