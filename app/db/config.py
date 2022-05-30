@@ -13,3 +13,10 @@ MYSQL_CONNECTION_DATA = dict(
     user='mysqluser',
     password='mysqlpassword',
 )
+
+MYSQL_TABLE_FIELDS = {
+    'customers': ('customer_id', 'full_name', 'address'),
+    'suppliers': ('supplier_id', 'company_name', 'phone_number'),
+    'hardwares': ('hardware_id', 'supplier_id', 'item_name'),
+    'purchases': ('purchase_id', 'customer_id', 'hardware_id'),
+}
