@@ -1,13 +1,14 @@
-from app.db.sqlite import init_hw_sqlite_db
-from app.db.postgres import init_hw_pg_db
-from app.db.migrate import migrate_sqlite_to_pg, migrate_pg_to_mysql
-from app.db.mysql import recreate_mysql_db, init_hw_mysql_db
+from app.db.admin import Admin
 
 
-recreate_mysql_db()
-init_hw_mysql_db()
-migrate_pg_to_mysql()
 
+admin = Admin()
+# new_id = admin.customers.delete(8)
+# print(new_id)
+
+new_id = admin.suppliers.create('alsasd', 'lol')
+lst = admin.suppliers.get_all()
+print(lst)
 
 
 
