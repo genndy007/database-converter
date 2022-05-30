@@ -29,4 +29,3 @@ def init_hw_mysql_db():
         cur.execute(f'use {DB_NAME}')
         with open(f'{SQL_DIR}/{DB_INIT_SCRIPT}') as sql:
             cur.execute(sql.read(), multi=True)
-            cur.close()
