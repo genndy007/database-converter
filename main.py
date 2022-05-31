@@ -1,14 +1,6 @@
-from app.db.admin import Admin
+from app.gui.run import run
 
-
-
-admin = Admin()
-# new_id = admin.customers.delete(8)
-# print(new_id)
-
-new_id = admin.suppliers.create('alsasd', 'lol')
-lst = admin.suppliers.get_all()
-print(lst)
+run()
 
 
 
