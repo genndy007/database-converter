@@ -5,9 +5,10 @@ description = ""
 authors = ["genndy007 <kochevgenazp@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.11"
 psycopg2 = "^2.9.3"
 mysql-connector-python = "^8.0.29"
+PyQt5 = "^5.15.6"
 
 [tool.poetry.dev-dependencies]
 
