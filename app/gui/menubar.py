@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QMenuBar, QAction, QWidget, QGridLayout
+from PyQt5.QtWidgets import (
+    QMenuBar, QAction, QWidget, QGridLayout, QLabel,
+)
 
 
 class Menu:
@@ -15,14 +17,23 @@ class Menu:
         table_menu.addAction('Purchases')
 
         help_menu = menubar.addMenu('Help')
-        help_menu.addAction()
+        help_menu.addAction(Action.about(parent))
 
         return menubar
 
 
 class Action:
     @staticmethod
-    def about():
+    def about(parent: QWidget):
+        action = QAction('About', parent)
+        action.setShortcut('Shift+F1')
+        action.setStatusTip('About program')
+        def show_about():
+            parent.aboutWindow = AboutWindow()
+            parent.aboutWindow.show()
+
+        action.triggered.connect(show_about)
+        return action
 
 
     @staticmethod
@@ -48,3 +59,5 @@ class AboutWindow(QWidget):
         self.setLayout(layout)
 
         self.setWindowTitle('About')
+        about_text = 'This program is written by Kochev Hennadii in 2022'
+        layout.addWidget(QLabel(about_text))
