@@ -5,6 +5,8 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QIcon
 
 from app.gui.menubar import Menu
+from app.gui.admin import TableView
+from app.gui.admin import AdminGUI
 
 
 class MainWindow(QWidget):
@@ -20,3 +22,6 @@ class MainWindow(QWidget):
 
         menubar = Menu.bar(self)
         layout.addWidget(menubar, 0, 0)
+
+        adminGUI = AdminGUI()
+        layout.addLayout(adminGUI, 1, 0)
