@@ -105,10 +105,16 @@ class PurchasesEntity(Entity):
 
 
 
-class Admin:
+class DBAdmin:
     def __init__(self):
         self.customers = CustomersEntity()
         self.suppliers = SuppliersEntity()
         self.hardwares = HardwaresEntity()
         self.purchases = PurchasesEntity()
+        self.entities = {
+            'customers': self.customers,
+            'suppliers': self.suppliers,
+            'hardwares': self.hardwares,
+            'purchases': self.purchases,
+        }
 
