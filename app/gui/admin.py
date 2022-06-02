@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import (
     QLineEdit, QHBoxLayout
 )
 from app.db.sqlite import SQLite
+from app.db.admin import DBAdmin
 
 
 # data like {
@@ -37,7 +38,7 @@ class TableView(QTableWidget):
         for n, key in enumerate(self.data.keys()):
             horHeaders.append(key)
             for m, item in enumerate(self.data[key]):
-                newItem = QTableWidgetItem(item)
+                newItem = QTableWidgetItem(str(item))
                 self.setItem(m, n, newItem)
         self.setHorizontalHeaderLabels(horHeaders)
 
@@ -46,17 +47,25 @@ class AdminGUI(QVBoxLayout):
     def __init__(self, table_name='customers'):
         QVBoxLayout.__init__(self)
         self.table_name = table_name
+        self.table_pos = 0
         self.initUI()
 
     def initUI(self):
         refreshTableButton = QPushButton('Refresh Table')
+        refreshTableButton.clicked.connect(self.refresh_table)
         table = TableView(self.table_name)
         line_add = LineAddGUI(self.table_name)
         line_remove = LineRemoveGUI(self.table_name)
-        self.addWidget(refreshTableButton)
         self.addWidget(table)
+        self.addWidget(refreshTableButton)
         self.addLayout(line_add)
         self.addLayout(line_remove)
+
+    def refresh_table(self):
+        table = self.itemAt(self.table_pos)
+        widget = table.widget()
+        widget.deleteLater()
+        self.insertWidget(self.table_pos, TableView(self.table_name))
 
 
 class LineAddGUI(QHBoxLayout):
@@ -65,6 +74,7 @@ class LineAddGUI(QHBoxLayout):
         self.table_name = table_name
         self.lines_num = self.get_lines_num()
         self.lines = [QLineEdit() for i in range(self.lines_num)]
+        self.db_admin = DBAdmin()
         self.initUI()
 
     def get_lines_num(self):
@@ -82,11 +92,11 @@ class LineAddGUI(QHBoxLayout):
         self.addWidget(add_button)
 
     def clickAdd(self):
-        text = ' '.join(line.text() for line in self.lines)
+        self.db_admin.entities[self.table_name].create(
+            *[line.text() for line in self.lines]
+        )
         for line in self.lines:
             line.clear()
-
-        print(text)
 
 
 class LineRemoveGUI(QHBoxLayout):
@@ -94,6 +104,7 @@ class LineRemoveGUI(QHBoxLayout):
         QHBoxLayout.__init__(self)
         self.table_name = table_name
         self.line_id = QLineEdit()
+        self.db_admin = DBAdmin()
         self.initUI()
 
     def initUI(self):
@@ -104,5 +115,11 @@ class LineRemoveGUI(QHBoxLayout):
         self.addWidget(remove_button)
 
     def clickRemove(self):
-        print(self.line_id.text())
+        try:
+            pk = int(self.line_id.text())
+        except Exception as e:
+            print(e)
+            return
+
+        self.db_admin.entities[self.table_name].delete(pk)
         self.line_id.clear()
