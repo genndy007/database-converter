@@ -7,10 +7,10 @@ DB_INIT_SCRIPT = 'init_hw_postgre.sql'
 class Postgres:
     def __enter__(self):
         self.conn = psycopg2.connect(**POSTGRES_CONNECTION_DATA)
+        self.conn.autocommit = True
         return self.conn.cursor()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.conn.commit()
         self.conn.close()
 
 def init_hw_pg_db():

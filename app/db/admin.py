@@ -7,6 +7,8 @@ from app.db.sqlite import SQLite
 def handle_error(error):
     def decorator(function):
         def wrapper(*args, **kwargs):
+            # print(args)
+            # print(kwargs)
             try:
                 return function(*args, **kwargs)
             except error as e:

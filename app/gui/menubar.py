@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (
 )
 
 from app.gui.admin import AdminGUI
-
+from app.db.migrate import migrate_sqlite_to_pg, migrate_pg_to_mysql
 
 class Menu:
     @staticmethod
@@ -13,13 +13,19 @@ class Menu:
         file_menu.addAction(Action.quit(parent))
 
         table_menu = menubar.addMenu('Table')
-        table_menu.addAction(Action.customers(parent))
+        table_menu.addAction('Customers')
         table_menu.addAction('Suppliers')
         table_menu.addAction('Hardwares')
         table_menu.addAction('Purchases')
 
+        migrate_menu = menubar.addMenu('Migrate')
+        migrate_menu.addAction(Action.sqlite_to_pg(parent))
+        migrate_menu.addAction(Action.pg_to_mysql(parent))
+
         help_menu = menubar.addMenu('Help')
         help_menu.addAction(Action.about(parent))
+
+
 
         return menubar
 
@@ -47,14 +53,17 @@ class Action:
         return action
 
     @staticmethod
-    def customers(parent):
-        action = QAction('Customers', parent)
-        # action.setShortcut('Alt+C')
-        # action.setStatusTip('Open Customers Menu')
-        # def add_layout():
-        #     parent.layout.addLayout(AdminGUI('suppliers'), 1, 0)
-        # action.triggered.connect(add_layout)
+    def sqlite_to_pg(parent):
+        action = QAction('SQLite to PostgreSQL', parent)
+        action.triggered.connect(migrate_sqlite_to_pg)
         return action
+
+    @staticmethod
+    def pg_to_mysql(parent):
+        action = QAction('PostgreSQL to MySQL', parent)
+        action.triggered.connect(migrate_pg_to_mysql)
+        return action
+
 
 
 class AboutWindow(QWidget):
