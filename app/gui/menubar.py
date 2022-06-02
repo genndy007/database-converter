@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import (
     QMenuBar, QAction, QWidget, QGridLayout, QLabel,
 )
 
+from app.gui.admin import AdminGUI
+
 
 class Menu:
     @staticmethod
@@ -45,10 +47,13 @@ class Action:
         return action
 
     @staticmethod
-    def customers(parent: QWidget):
+    def customers(parent):
         action = QAction('Customers', parent)
-        action.setShortcut('Alt+C')
-        action.setStatusTip('Open Customers Menu')
+        # action.setShortcut('Alt+C')
+        # action.setStatusTip('Open Customers Menu')
+        # def add_layout():
+        #     parent.layout.addLayout(AdminGUI('suppliers'), 1, 0)
+        # action.triggered.connect(add_layout)
         return action
 
 
