@@ -9,11 +9,12 @@ from app.gui.admin import TableView
 from app.gui.admin import AdminGUI
 
 
+
 class MainWindow(QWidget):
     def __init__(self):
         QWidget.__init__(self)
-        layout = QGridLayout()
-        self.setLayout(layout)
+        self.layout = QGridLayout()
+        self.setLayout(self.layout)
 
         self.MIN_WIDTH = 400
         self.MIN_HEIGHT = 200
@@ -21,7 +22,9 @@ class MainWindow(QWidget):
         self.setWindowTitle('Database Converter-Browser')
 
         menubar = Menu.bar(self)
-        layout.addWidget(menubar, 0, 0)
+        self.layout.addWidget(menubar, 0, 0)
 
-        adminGUI = AdminGUI()
-        layout.addLayout(adminGUI, 1, 0)
+        self.layout.addLayout(AdminGUI('customers'), 1, 0)
+        self.layout.addLayout(AdminGUI('suppliers'), 1, 1)
+        self.layout.addLayout(AdminGUI('hardwares'), 2, 0)
+        self.layout.addLayout(AdminGUI('purchases'), 2, 1)
