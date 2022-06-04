@@ -12,6 +12,7 @@ MYSQL_CONNECTION_DATA = dict(
     host='localhost',
     user='mysqluser',
     password='mysqlpassword',
+    database=DB_NAME,
 )
 
 MYSQL_TABLE_FIELDS = {
