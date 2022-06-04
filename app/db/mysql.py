@@ -26,9 +26,9 @@ def recreate_mysql_db():
 
 def init_hw_mysql_db():
     with MySQL() as cur:
-        cur.execute(f'use {DB_NAME}')
         with open(f'{SQL_DIR}/{DB_INIT_SCRIPT}') as sql:
             cur.execute(sql.read(), multi=True)
-            cur.fetchall()
-        cur.execute('show tables')
-        print(cur.fetchall())
+
+
+if __name__ == '__main__':
+    init_hw_mysql_db()

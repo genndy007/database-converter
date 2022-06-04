@@ -17,3 +17,7 @@ def init_hw_pg_db():
     with Postgres() as cur:
         with open(f'{SQL_DIR}/{DB_INIT_SCRIPT}') as sql:
             cur.execute(sql.read())
+
+
+if __name__ == "__main__":
+    init_hw_pg_db()
