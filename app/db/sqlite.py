@@ -20,8 +20,8 @@ class SQLite:
         self.conn.close()
 
 
-def init_hw_sqlite_db():
-    os.remove(f'{CACHE_DIR}/{DB_FILE_NAME}')
+def init_hw_sqlite_db(file_name=DB_FILE_NAME):
+    os.remove(f'{CACHE_DIR}/{file_name}')
     with SQLite() as cur:
         with open(f'{SQL_DIR}/{DB_INIT_SCRIPT}') as sql:
             cur.executescript(sql.read())
