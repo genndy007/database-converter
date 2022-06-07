@@ -4,7 +4,7 @@
 
 # User-specific stuff
 .idea
-
+train.py
 **.sqlite3
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
