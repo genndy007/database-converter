@@ -9,6 +9,7 @@ python = ">=3.10,<3.11"
 psycopg2 = "^2.9.3"
 mysql-connector-python = "^8.0.29"
 PyQt5 = "^5.15.6"
+peewee = "^3.14.10"
 
 [tool.poetry.dev-dependencies]
 
